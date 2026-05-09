@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if rtl else 'ltr' }}">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{{ text.add_pt }}</title>
+    <style>
+        body { background: #f8fafc; font-family: 'Montserrat', sans-serif; }
+        .card { background: white; border-radius: 2rem; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+        .toggle-btn { background: #f1f5f9; border: 2px solid #e2e8f0; transition: 0.3s; }
+        .toggle-btn.active { background: #ef4444; border-color: #ef4444; color: white; }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-3xl mx-auto card p-12">
+        <h2 class="text-3xl font-bold mb-10 text-blue-600 text-center">{{ text.add_pt }}</h2>
+        <form action="{{ url_for('add_patient') }}" method="POST" class="space-y-6">
+            <input type="text" name="name" placeholder="{{ text.name }}" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl" required>
+            <div class="grid grid-cols-2 gap-4">
+                <input type="number" name="age" placeholder="{{ text.age }}" class="bg-slate-50 border border-slate-200 p-4 rounded-xl" required>
+                <input type="number" step="0.1" name="weight" placeholder="{{ text.weight }}" class="bg-slate-50 border border-slate-200 p-4 rounded-xl" required>
+            </div>
+            <select name="gender" id="genderSelect" onchange="checkSmoker()" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                <option value="female">{{ text.female }}</option>
+                <option value="male">{{ text.male }}</option>
+            </select>
+
+            <div id="smokerSection" class="hidden space-y-3">
+                <p class="text-xs font-bold text-slate-400 uppercase">{{ text.smoker }}</p>
+                <div class="flex gap-4">
+                    <button type="button" onclick="setSmoker(true)" id="bY" class="toggle-btn flex-1 py-4 rounded-xl font-bold">{{ text.yes }}</button>
+                    <button type="button" onclick="setSmoker(false)" id="bN" class="toggle-btn flex-1 py-4 rounded-xl font-bold active">{{ text.no }}</button>
+                    <input type="hidden" name="smoker" id="smokerValue" value="false">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 py-6 rounded-2xl text-white font-bold uppercase tracking-widest">{{ text.next }}</button>
+        </form>
+    </div>
+    <script>
+        function checkSmoker() { document.getElementById('smokerSection').style.display = (document.getElementById('genderSelect').value === 'male') ? 'block' : 'none'; }
+        function setSmoker(v) { document.getElementById('smokerValue').value = v; document.getElementById('bY').classList.toggle('active', v); document.getElementById('bN').classList.toggle('active', !v); }
+    </script>
+</body>
+</html>

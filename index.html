@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if rtl else 'ltr' }}">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    <title>{{ text.platform_name }}</title>
+    <style>
+        body { background: #020617; font-family: 'Montserrat', sans-serif; color: white; }
+        .hero-text { font-family: 'Playfair Display', serif; }
+        .btn-premium { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); transition: 0.4s; }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6">
+    <div class="fixed top-8 right-8 flex gap-3">
+        <a href="/set_lang/en" class="bg-slate-900 px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-600 transition-all">EN</a>
+        <a href="/set_lang/fr" class="bg-slate-900 px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-600 transition-all">FR</a>
+        <a href="/set_lang/ar" class="bg-slate-900 px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-600 transition-all">AR</a>
+    </div>
+
+    <h1 class="text-3xl font-black text-blue-500 mb-2 tracking-tighter">{{ text.platform_name }}</h1>
+    <h2 class="hero-text text-xl md:text-3xl text-red-500 mb-10 text-center leading-tight">"{{ text.hero_msg }}"</h2>
+    
+    <div class="max-w-4xl w-full aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-slate-800 bg-black mb-12">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover">
+            <source src="{{ url_for('static', filename='videos/5STAGES.mp4') }}" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-6">
+        <a href="{{ url_for('register') }}" class="btn-premium px-12 py-5 rounded-2xl text-xl font-bold uppercase tracking-widest">{{ text.discover_btn }}</a>
+        <a href="{{ url_for('dashboard') }}" class="bg-slate-900 px-12 py-5 rounded-2xl text-xl font-bold uppercase tracking-widest">{{ text.dash }}</a>
+    </div>
+
+    <footer class="mt-20 text-slate-600 text-[10px] uppercase tracking-widest text-center">{{ text.developed_by }}</footer>
+</body>
+</html>
