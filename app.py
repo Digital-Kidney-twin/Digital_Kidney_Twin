@@ -102,7 +102,18 @@ def inject_vars():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Digital Kidney Twin</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>Digital Kidney Twin</h1>
+    </body>
+    </html>
+    """
 
 @app.route('/dashboard')
 def dashboard():
